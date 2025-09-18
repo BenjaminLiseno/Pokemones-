@@ -1,0 +1,36 @@
+
+let seguir_cargando = false;
+const pokemones = [];
+const pokemon = {
+  nombre: "",
+  nivel: 0,
+  tipo: [],
+  foto: "",
+  hp: 0,
+  hp_total: 0,
+  evolución: false,
+};
+//Captura
+do {
+  //Carga de pokemones
+  pokemon.nombre = prompt("Ingrese el nombre del Pokémon:");
+  pokemon.nivel = Number(prompt("Ingrese el nivel del Pokémon:"));
+
+  //guardamos los datos en el array de
+  pokemones.push(pokemon);
+  let terminar = prompt("¿Desea cargar otro Pokémon? (si/no)");
+  //reiniciamos el chekeo de la variable para seguir o no cargando datos
+  seguir_cargando = false;
+  if (terminar === "si") {
+    seguir_cargando = true;
+  }
+} while (seguir_cargando === true);
+
+//Mostrar datos cargados en array
+console.log(pokemones);
+for (let i = 0; i < pokemones.length; i++) {
+  console.log(
+    "Nombre: " + pokemones[i].nombre + ", Nivel: " + pokemones[i].nivel
+  );
+}
+
