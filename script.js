@@ -1,36 +1,103 @@
-
-let seguir_cargando = false;
-const pokemones = [];
-const pokemon = {
-  nombre: "",
-  nivel: 0,
-  tipo: [],
-  foto: "",
-  hp: 0,
-  hp_total: 0,
-  evolución: false,
-};
-//Captura
-do {
-  //Carga de pokemones
-  pokemon.nombre = prompt("Ingrese el nombre del Pokémon:");
-  pokemon.nivel = Number(prompt("Ingrese el nivel del Pokémon:"));
-
-  //guardamos los datos en el array de
-  pokemones.push(pokemon);
-  let terminar = prompt("¿Desea cargar otro Pokémon? (si/no)");
-  //reiniciamos el chekeo de la variable para seguir o no cargando datos
-  seguir_cargando = false;
-  if (terminar === "si") {
-    seguir_cargando = true;
+let pokemones = [
+  {
+    nombre: "Pikachu",
+    nivel: 12,
+    tipo: ["Eléctrico"],
+    hp: 35,
+    hp_total: 35,
+    evolucion: true
+  },
+  {
+    nombre: "Charmander",
+    nivel: 10,
+    tipo: ["Fuego"],
+    hp: 39,
+    hp_total: 39,
+    evolucion: true
+  },
+  {
+    nombre: "Squirtle",
+    nivel: 9,
+    tipo: ["Agua"],
+    hp: 44,
+    hp_total: 44,
+    evolucion: true
   }
-} while (seguir_cargando === true);
+];
 
-//Mostrar datos cargados en array
-console.log(pokemones);
-for (let i = 0; i < pokemones.length; i++) {
-  console.log(
-    "Nombre: " + pokemones[i].nombre + ", Nivel: " + pokemones[i].nivel
+let opcion = "";
+
+while (opcion !== "salir") {
+  opcion = prompt(
+    "¿Qué querés hacer?\n1. Mostrar todos los pokemones\n2. Cargar nuevo Pokémon\n3. Restar HP\nEscribí 'salir' para terminar"
   );
+
+  if (opcion === "1") {
+    let mensaje = "Pokemones actuales:\n";
+    for (let i = 0; i < pokemones.length; i++) {
+      mensaje +=
+        (i + 1) + ". " +
+        pokemones[i].nombre +
+        " | Nivel: " + pokemones[i].nivel +
+        " | Tipo: " + pokemones[i].tipo.join(", ") +
+        " | HP: " + pokemones[i].hp + "/" + pokemones[i].hp_total +
+        " | Evoluciona: " + (pokemones[i].evolucion ? "Sí" : "No") +
+        "\n";
+    }
+    alert(mensaje);
+  }
+
+  else if (opcion === "2") {
+    let continuar = "s";
+    while (continuar === "s") {
+      let nombre = prompt("Nombre del Pokémon:");
+      let nivel = Number(prompt("Nivel del Pokémon:"));
+      let tipos = prompt("Tipos del Pokémon (separados por coma):").split(",");
+      let hp_total = Number(prompt("HP total del Pokémon:"));
+      let hp = hp_total;
+      let evolucion = prompt("¿Puede evolucionar? (s/n)") === "s";
+
+      let nuevo = {
+        nombre: nombre,
+        nivel: nivel,
+        tipo: tipos,
+        hp: hp,
+        hp_total: hp_total,
+        evolucion: evolucion
+      };
+
+      pokemones.push(nuevo);
+
+      continuar = prompt("¿Querés agregar otro? (s/n)");
+    }
+  }
+
+  else if (opcion === "3") {
+    let nombre = prompt("¿A qué Pokémon le querés restar HP?");
+    let encontrado = false;
+
+    for (let i = 0; i < pokemones.length; i++) {
+      if (pokemones[i].nombre.toLowerCase() === nombre.toLowerCase()) {
+        let resta = Number(prompt("¿Cuánto HP querés restarle?"));
+        pokemones[i].hp -= resta;
+        if (pokemones[i].hp < 0) pokemones[i].hp = 0;
+        alert(pokemones[i].nombre + " ahora tiene " + pokemones[i].hp + " HP.");
+        encontrado = true;
+        break;
+      }
+    }
+
+    if (!encontrado) {
+      alert("No se encontró ese Pokémon.");
+    }
+  }
+
+  else if (opcion === "salir") {
+    alert("Programa finalizado.");
+  }
+
+  else {
+    alert("Opción inválida.");
+  }
 }
 
