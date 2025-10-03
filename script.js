@@ -22,6 +22,14 @@ let pokemones = [
     hp: 44,
     hp_total: 44,
     evolucion: true
+  },
+  {
+    nombre: "BigFrank",
+    nivel: 14,
+    tipo: ["Aire"],
+    hp: 90,
+    hp_total: 90,
+    evolucion: true
   }
 ];
 
