@@ -22,6 +22,14 @@ let pokemones = [
     hp: 44,
     hp_total: 44,
     evolucion: true
+  },
+  {
+    nombre: "gengar",
+    nivel: 9,
+    tipo: ["fantasma"],
+    hp: 44,
+    hp_total: 44,
+    evolucion: true
   }
 ];
 
